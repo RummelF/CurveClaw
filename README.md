@@ -2,6 +2,7 @@
 
 ## OVERVIEW
 CurveClaw was developed as a tool to extract numerical data from images, the aim was to create a modular system which allowed for user control at all levels. Further method scripts can be added to the methods folder to address other requirements.
+
 Development is still ongoing and so far has only been tested on windows.
 
 ## BASIC WORKFLOW
