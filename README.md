@@ -129,13 +129,13 @@ You can run the `curveclaw` package using any of the below **methods**:
 1. **Download** either of the following files from the release page:  
    - **`curveclaw-<version>.tar.gz`**  
    - **`curveclaw-<version>-py3-none-any.whl`**  
-4. **Install the downloaded package** using pip:  
+2. **Install the downloaded package** using pip:  
 ```bash
 pip install path/to/curveclaw-<version>.tar.gz
 # OR
 pip install path/to/curveclaw-<version>-py3-none-any.whl
 ```
-5. After successful installation, you can run the package using:
+3. After successful installation, you can run the package using:
 ```bash
 curveclaw
 ```
