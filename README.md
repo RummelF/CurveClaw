@@ -123,7 +123,7 @@ uv run curveclaw
 
 ##  How to Run the Package
 
-You can run the `curveclaw` package using any of the below**methods**:  
+You can run the `curveclaw` package using any of the below **methods**:  
 
 ### **Method 1: Download from GitHub (Manual Installation)**
 1. **Download** either of the following files from the release page:  
