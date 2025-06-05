@@ -116,9 +116,6 @@ Development is still ongoing and so far has only been tested on windows.
 ### Prerequisites
 - Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
 
-### Debugging
-Configuration for VS Code debugging defined in [`.vscode`](./.vscode/launch.json)
-
 ## Running
 ```shell
 uv run curveclaw
