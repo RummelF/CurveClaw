@@ -151,4 +151,15 @@ Run the following command:
 ```bash
 uv run --with ./curveclaw/dist/curveclaw-0.1.6-py3-none-any.whl --no-project -- python -m curveclaw
 ```
- 
+##  FAQs
+
+### The program doesn't start up and says "tkinter is required but not installed."
+
+This means that tkinter (Library to bind to the Tk GUI toolkit for Python) is not available on your machine. This is common with Mac and Linux systems (For Windows, tkinter is built into the standard library). To fix this you will need to install tkinter, on a Mac the command for this is,
+
+```
+brew install python-tk
+```
+
+For linux the package name and package manager used varies, the package may be called `python3-tk`, `tk` or `python3-tkinter`. Use the available package manager for your distro to install the package available to you.
+
