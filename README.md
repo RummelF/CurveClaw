@@ -1,23 +1,59 @@
 # CurveClaw
 
 ## OVERVIEW
-CurveClaw was developed as a tool to extract numerical data from images, the aim was to create a modular system which allowed for user control at all levels. Further method scripts can be added to the methods folder to address other requirements.
+CurveClaw is a tool which extracts numerical data from images. CurveClaw has particularly been applied to the digitalisation of phase diagrams within the Materials Group of UKRI STFC Hartree Centre, where we care about identifying regions bound by lines. CurveClaw has also been used within the same group to extract the data of x vs y line plots to identify the x and y coordinates of pixels in lines on more general scientific plots. 
 
-Development is still ongoing and so far has only been tested on windows.
+## INSTALLATION INSTRUCTIONS
+### Prerequisites
+* Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
+* Install tkinter (library that binds the Tk GUI toolkit for Python) :
+* * Windows Operating System (OS) has it already builts into the standard library;
+  * Mac OS:
+     ```
+      brew install python-tk
+      ```
+   * Linux OS: The package name and package manager varies according to the specific Linux OS. The package may be called `python3-tk`, `tk` or `python3-tkinter`. Use the available package manager for your distro to install the package available to you.
 
-## BASIC WORKFLOW
+### Download
+```
+git clone https://github.com/RummelF/CurveClaw.git
+cd CurveClaw
+```
 
-- Launch CurveClaw (see section: "Running")
-- Select the image file you wish to edit, this needs to be in a suitable format such as .png or .jpeg.
-- Optional: The Draw Lines Button will allow for additional lines with desired thickness and colour to be drawn on the image at any point.
-- Optional: The Hash Connector Button allows for hashes to be connected.
-- Extract the graph, this should identify the graph area and crop the image, MAKE SURE the graph area is defined on all four sides, as the bounding box of the graph is used to crop. The graph may also be straightened, rotated or flipped as desired (thought to enable these options it should be straightened first). At the moment only 2D plots of binary or ternary type diagrans are supported.
-- Optional: Automatic Cleaning provides a set of quick cleaning tools to edit the graph such as discarding small features, thinning and thickening as well as filling small areas.
-- Use Curve Claw to define individual curves or areas by selecting the desired lines
-- Define the graph information in the Data extractor, as well as the desired method to extract the output data.
-- Output is found in the output folder as .txt and .png files, Images saved along the way are saved in the preview and curves folders and can be edited between steps if needed using other image editing software.
+### Run
 
-## FURTHER DETAILS
+```
+pip3 install curveclaw-<version>.tar.gz
+# OR
+pip3 install curveclaw-<version>-py3-none-any.whl
+```
+After successful installation, you can run the package using:
+```
+curveclaw
+```
+
+You can alternatively install and run the downloaded package using *uv* by running the following command:  
+```
+uv run --with ./curveclaw/dist/curveclaw-x.y.z-py3-none-any.whl --no-project --python 3.w -m curveclaw
+```
+In the above remember to replace x.y.z with your CurveClaw distribution version and w with your Python3 version.
+
+Development is still ongoing and so far has only been tested on Windows OS and mac OS.
+
+
+## USAGE DIRECTIVES FOR COMMON USE-CASES
+
+* Launch CurveClaw (see section: "Run" above);
+* Select the image file you wish to edit, this needs to be in a suitable format such as .png or .jpeg.
+* Optional: The Draw Lines Button will allow for additional lines with desired thickness and colour to be drawn on the image at any point.
+* Optional: The Hash Connector Button allows for hashes to be connected.
+* Extract the graph, this should identify the graph area and crop the image, MAKE SURE the graph area is defined on all four sides, as the bounding box of the graph is used to crop. The graph may also be straightened, rotated or flipped as desired (thought to enable these options it should be straightened first). At the moment only 2D plots of binary or ternary type diagrans are supported.
+* Optional: Automatic Cleaning provides a set of quick cleaning tools to edit the graph such as discarding small features, thinning and thickening as well as filling small areas.
+* Use Curve Claw to define individual curves or areas by selecting the desired lines
+* Define the graph information in the Data extractor, as well as the desired method to extract the output data.
+* Output is found in the output folder as .txt and .png files, Images saved along the way are saved in the preview and curves folders and can be edited between steps if needed using other image editing software.
+
+## USAGE DIRECTIVES FOR MORE ADVANCED USE-CASES
 
 ### Extraction
 
@@ -111,46 +147,7 @@ Development is still ongoing and so far has only been tested on windows.
    - The lower the image resolution the faster the process.
    - The output is saved in the output folder. 
    
-## Development
 
-### Prerequisites
-- Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
-
-## Running
-```shell
-uv run curveclaw
-```
-
-##  How to Run the Package
-
-You can run the `curveclaw` package using any of the below **methods**:  
-
-### **Method 1: Download from GitHub (Manual Installation)**
-1. **Download** either of the following files from the release page:  
-   - **`curveclaw-<version>.tar.gz`**  
-   - **`curveclaw-<version>-py3-none-any.whl`**  
-2. **Install the downloaded package** using pip:  
-```bash
-pip install path/to/curveclaw-<version>.tar.gz
-# OR
-pip install path/to/curveclaw-<version>-py3-none-any.whl
-```
-3. After successful installation, you can run the package using:
-```bash
-curveclaw
-```
-
-### **Method 2: Install manually using uv**
-
-1. **Download** either of the following files from the release page:  
-   - **`curveclaw-<version>.tar.gz`**  
-   - **`curveclaw-<version>-py3-none-any.whl`**  
-2. **Install and run the downloaded package** using uv: 
-
-Run the following command:  
-```bash
-uv run --with ./curveclaw/dist/curveclaw-0.1.6-py3-none-any.whl --no-project -- python -m curveclaw
-```
 ##  FAQs
 
 ### The program doesn't start up and says "tkinter is required but not installed."
