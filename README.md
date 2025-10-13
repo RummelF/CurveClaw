@@ -7,7 +7,7 @@ CurveClaw is a tool which extracts numerical data from images. CurveClaw has par
 ### Prerequisites
 * Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
 * Install tkinter (library that binds the Tk GUI toolkit for Python) :
-* * Windows Operating System (OS) has it already builts into the standard library;
+* * Windows Operating System (OS) has it already built into the standard library;
   * Mac OS:
      ```
       brew install python-tk
