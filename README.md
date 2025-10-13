@@ -36,9 +36,9 @@ You can alternatively install and run the downloaded package using *uv* by runni
 ```
 uv run --with ./curveclaw/dist/curveclaw-x.y.z-py3-none-any.whl --no-project --python 3.w -m curveclaw
 ```
-In the above remember to replace x.y.z with your CurveClaw distribution version and w with your Python3 version.
+In the above remember to replace *x.y.z* with your CurveClaw distribution version and *w* with your Python3 version.
 
-Development is still ongoing and so far has only been tested on Windows OS and mac OS.
+Development is still ongoing and so far has only been tested on Windows OS and Mac OS.
 
 
 ## USAGE DIRECTIVES FOR COMMON USE-CASES
