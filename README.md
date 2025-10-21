@@ -1,7 +1,7 @@
 # CurveClaw
 
 ## OVERVIEW
-CurveClaw is a tool which extracts numerical data from images. CurveClaw has particularly been applied to the digitalisation of phase diagrams within the Materials Group of UKRI STFC Hartree Centre, where we care about identifying regions bound by lines. CurveClaw has also been used within the same group to extract the data of x vs y line plots to identify the x and y coordinates of pixels in lines on more general scientific plots. 
+CurveClaw is a tool which extracts numerical data from images. CurveClaw has particularly been applied to the digitalisation of both binary and ternary phase diagrams within the Materials Group of UKRI STFC Hartree Centre, where we care about identifying regions bound by lines. CurveClaw has also been used within the same group to extract the data of x vs y line plots to identify the x and y coordinates of pixels in lines on more general scientific plots. 
 
 ## INSTALLATION INSTRUCTIONS
 ### Prerequisites
@@ -38,22 +38,34 @@ uv run --with ./curveclaw/dist/curveclaw-x.y.z-py3-none-any.whl --no-project --p
 ```
 In the above remember to replace *x.y.z* with your CurveClaw distribution version and *w* with your Python3 version.
 
-Development is still ongoing and so far has only been tested on Windows OS and Mac OS.
+Alternatively using *uv* within the **unziped** curveclaw directory:
+```
+uv run -m curveclaw
+```
 
+Development is still ongoing and so far has only been tested on Windows OS and Mac OS.
 
 ## USAGE DIRECTIVES FOR COMMON USE-CASES
 
 * Launch CurveClaw (see section: "Run" above);
 * Select the image file you wish to edit, this needs to be in a suitable format such as .png or .jpeg.
 * Optional: The Draw Lines Button will allow for additional lines with desired thickness and colour to be drawn on the image at any point.
-* Optional: The Hash Connector Button allows for hashes to be connected.
-* Extract the graph, this should identify the graph area and crop the image, MAKE SURE the graph area is defined on all four sides, as the bounding box of the graph is used to crop. The graph may also be straightened, rotated or flipped as desired (thought to enable these options it should be straightened first). At the moment only 2D plots of binary or ternary type diagrans are supported.
+* Optional: The Line Connector Button allows for hashes within a hashed lines to be connected (made into solid lines).
+* Extract the graph, this should identify the graph area and crop the image, MAKE SURE the graph area is defined on all four sides, as the bounding box of the graph is used to crop. The graph may also be straightened, rotated or flipped as desired (thought to enable these options it should be straightened first). At the moment only 2D plots of binary or ternary type, or more generic x vs y line diagrams are supported.
 * Optional: Automatic Cleaning provides a set of quick cleaning tools to edit the graph such as discarding small features, thinning and thickening as well as filling small areas.
-* Use Curve Claw to define individual curves or areas by selecting the desired lines
-* Define the graph information in the Data extractor, as well as the desired method to extract the output data.
+* Use the Curve Selection page to define individual curves or areas by selecting the desired lines.
+* Define the graph information and meta data in the Data extractor, as well as the desired method to extract the output data.
 * Output is found in the output folder as .txt and .png files, Images saved along the way are saved in the preview and curves folders and can be edited between steps if needed using other image editing software.
 
+## TUTORIAL
+
+For a more complete step by step tutorial see the tutorial.pdf in the examples folder. For specific information on each button see **USAGE DIRECTIVES FOR MORE ADVANCED USE-CASES**
+
 ## USAGE DIRECTIVES FOR MORE ADVANCED USE-CASES
+
+### Changing the Working Directory
+
+- Prior to starting work the user may wish to define their own folder as the standard folder to which all outputs are saved, for this select *Change Working Directory* navigate to the desired folder and press *Select Folder*, then restart CurveClaw for changes to take effect.
 
 ### Extraction
 
@@ -76,8 +88,15 @@ Development is still ongoing and so far has only been tested on Windows OS and M
 - Thinning of all lines can be performed, this will thin all features without increasing the number of white areas present in the image.
    - Features not enclosing white pixels are removed entirely. This may not always be useful and often the curve selection will yield a better result in the following steps. 
 - At any point changes can be undone by reloading the input, or discarding and exiting. 
+- *Fix Input/Output Connectivity* checks for the presence of black diagonally adjacent pixels and places additional pixels on the horizontal/vertical gap to ensure that all pixels are directly connected to each other.
 - Once satisfied, the output should be saved. 
    - The output overwrites the input in the preview folder. 
+
+### Line Connector
+- **Define New Hash Sequence** allows the user to start connecting up a hashed line, click on each hash consectuviely the program will find the two closest black pixels in each of the two connected black pixel areas represented by the hashes and draw a straight line between them.
+- **Delete Last Point/Set** deletes the last two points resulting in the last connection being deleted.
+- Some images contain many different hashed lines, ensure you press **Define New Hash Sequence** prior to starting on a new line.
+- Use the slider to set the line thickness of drawn lines
 
 ### Curve Selection  
 
@@ -93,22 +112,27 @@ Development is still ongoing and so far has only been tested on Windows OS and M
    - If they are part of the same feature:
       - The feature is used to construct a maze where the final path may only navigate pixels on that feature
       - The shortest continous path is constructed.
-- The last selected point of the current working line can be deleted iteratively. 
+- **Undo Selection** allows for the last selected point of the current working line to be deleted iteratively. 
    - However this will not delete points in old lines, so ensure you’re fully satisfied with a line before pressing **New Line**.
 - The line thickness can be controlled if needed.
    - This only affects the current line.
 - **Drag Current Line** lets the user click and drag a line:
-   - The initial cursor position finds the closest pixel on the curve
-   - The release will determine the new position following the usual rules
+   - The initial cursor position and left mouse press finds the closest pixel on the current line 
+   - The mouse button release and nwe cursor position will determine the new position of the line following the above rules
 - Generally the start and end of a line is sufficient for defining lines, but sometimes 3 or more points need to be defined.
 - By virtue of the maze solving algorithm defining lines right to left is slightly different to left to right in some cases.
 - Once all areas are defined, or all lines of interest are defined separately remember to save the output. 
+
+### Draw Lines
+- A basic image editor allows for straight lines to be drawn onto the current image
+   - The thickness in pixels can be changed
+   - The colour of the new line can be changed
 
 ### Data Extraction
 
 - First select the curves you wish to work on:
    - Select a specific file or files
-   - Automatic selection will select all curves which were manually selected in the curve selection section
+   - Automatic selection will select all curves which were manually selected in the curve selection section or if none were specified the last used image is selected
 
 - You may overlay these to display them
    - The number of areas defined by lines is displayed 
@@ -118,7 +142,7 @@ Development is still ongoing and so far has only been tested on Windows OS and M
 - **Data Extraction mode** is a dropdown allowing binary, line or ternary to be selected
    - **Binary** indicates that there is an x and y axis, here the white areas on the image are analysed
    - **Ternary** indicates a barycentric x, y and z axis plot, here the white areas on the image are analysed
-   - **Line** indicates that each selected file should be analysed seperately such that the position of each pixel on the line is returned
+   - **Line** indicates that each selected line should be analysed seperately such that the position of each pixel on the line is returned
  
 - **X, Y, Z Dimesions** defines the coordinates of the axis in a comma separated list “()” are for clarity: 
    - Entered as (xmin, xmax), (ymin, ymax),…
@@ -134,19 +158,40 @@ Development is still ongoing and so far has only been tested on Windows OS and M
    
 - **Method Selection** allows the selection of the method script to be used to analyse the images and data defined.
    - **Binary Phase Assign** the grid specified is used to construct an array of test points, in each case the coordinate are recorded and the area this point is in.
-   - **Binary Probability** the grid specified is used to construct an array of test points, in each case the coordinate is used to calculate the Probability of this point of being in each area of the diagram.
+   - **Binary Probability** the grid specified is used to construct an array of test points, in each case the coordinate is used to calculate the Probability of this point of being in each area of the diagram. here the distance of the grid point to each white area is used to determine the probability of being in that area.
    - **Ternary Phase Assign** as the equivalent binary version except here we use barycentric coordinates.
    - **Ternary Probability** as the equivalent binary version except here we use barycentric coordinates.
-   - **Line Data** here the X,Y,Z Grid control defines the number of boxes the image is split into along each axis, this is used to create a less fine determination of data. For each box only one pixel of the line, if the line intersects the box, is used to generate coordinates. 
+   - **Line Data** here the x and y coordinates of pixels on each line defined in the curve selection step are calculated. The X and Y Grid control defines the number of boxes the image is split into along each axis, this is used to create a less fine determination of data. For each box only one pixel of the line, if the line intersects the box, is used to generate coordinates. This rough as well as a complete dataset is returned. 
 
 - Once the method is selected further data to describe the curve/areas may be entered.
 
 - **Enter Meta Data** allows for meta data describing the image to be saved.
 
-- **Extract Data** will start the data extraction, this may take a few minutes depending on the inputs.
+- **Extract & Save Data** will start the data extraction, this may take a few minutes depending on the inputs.
    - The lower the image resolution the faster the process.
    - The output is saved in the output folder. 
    
+## Development
+
+### Prerequisites
+- Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
+
+### Debugging
+Configuration for VS Code debugging defined in [`.vscode`](./.vscode/launch.json)
+
+## Running
+```shell
+uv run -m curveclaw
+```
+
+## Linting
+
+The below commands will fix any linting issues in the code. They should ideally be run after any changes to ensure code format is maintined. If they are not run the remote pipeline may fail. They should be run on the top-level curveclaw directory so that all files are checked for formatting.
+
+```
+uv run ruff format .
+uv run ruff check --fix .
+```
 
 ##  FAQs
 
@@ -159,4 +204,3 @@ brew install python-tk
 ```
 
 For linux the package name and package manager used varies, the package may be called `python3-tk`, `tk` or `python3-tkinter`. Use the available package manager for your distro to install the package available to you.
-
